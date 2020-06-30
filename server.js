@@ -6,22 +6,26 @@ var upload = require("./Api/upload");
 var article = require("./Api/articleApi");
 var affect = require('./Api/affectApi')
 var passport = require("./api/passport")
+var socket = require('./Api/socketapi');
 
-
-var cors = require('cors')
+var http = require('http');
+const socketIO = require('socket.io');
 var path = require('path')
- 
-// var router = express.Router();
+var cors = require('cors')
 var app = express();
-
 app.use(jsonparser.json({ limit: '50mb' }));
 app.use(jsonparser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
 app.use(cors()); 
 app.use('/upload',express.static(path.join(__dirname, 'upload')));
-
 app.use("/user",userapi);
 app.use("/uploadimg",upload);
 app.use("/article",article);
 app.use("/affect",affect);
+app.use("/socket",socket);
 
-app.listen(3000);
+const server = http.createServer(app);  
+const io = socketIO(server);
+app.set('io', io);
+app.use(express.static(path.join(__dirname, 'dist')));
+
+server.listen(3000);

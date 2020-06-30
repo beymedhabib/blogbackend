@@ -14,6 +14,7 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
     "process": "^0.11.10",
-    "req": "^0.1.4"
+    "req": "^0.1.4",
+    "socket.io": "^2.2.0"
   }
 }

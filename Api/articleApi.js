@@ -38,4 +38,22 @@ router.put('/update/:id',(req,res)=>{
         }
     })
 })
+router.get('/:id',(req,res)=>{
+   article.findById(req.params.id,(err,resultat)=>{
+       if (err) {
+           res.send(err)
+       } else {
+           res.send(resultat)
+       }
+   })
+})
+router.put('/comment/:id/:username',(req,res)=>{
+    article.findByIdAndUpdate(req.params.id,{$push:{comment: {username:req.params.username,coment: req.body}}},(err,resultat)=>{
+        if (err) {
+            res.send(err)
+        } else {
+            res.send(resultat)
+        }
+    })
+})
 module.exports = router
