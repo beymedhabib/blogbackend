@@ -7,7 +7,6 @@ var user = new  mongoose.Schema({
     password:String,
     article: [{type: mongoose.Schema.Types.ObjectId, ref: 'article'}]
 })
-
 user.pre('save', function(next) {                                                                                                                                        
     if(this.password) {                                                                                                                                                        
         var salt = bcrypt.genSaltSync(10)                                                                                                                                     

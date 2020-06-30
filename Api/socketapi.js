@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var article = require('./../models/articleSchema');
-
 router.put('/comment/:id',(req,res)=>{
- 
   article.findByIdAndUpdate(req.params.id, {$push:{comment:req.body}},(err,Comment)=>{
     if (err) {
       res.send(err)
@@ -24,4 +22,3 @@ router.get('/getcomment/:id',(req,res)=>{
   })
 })
 module.exports = router;
-
